@@ -20,8 +20,8 @@
 struct Config {
   std::shared_ptr<spdlog::logger>
       logger; /*!< Logger pointer when logging is requested. */
-  std::string data_dir = "../data/"; /*!< Directory where the data is stored */
-  std::string log_file = "../logs/app_log.txt";
+  std::string data_dir = "data/"; /*!< Directory where the data is stored */
+  std::string log_file = "logs/app_log.txt";
   int model_batch_size = 50; /*!< Batch size of model for the learning algo */
   int max_iterations =
       100; /*!< Max iteration before terminating the learning algo */

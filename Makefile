@@ -41,7 +41,7 @@ build/obj/%.o: */%.cpp
 build/test/%.ok: build/bin/%
 	@mkdir -p $(dir $@)
 	@echo $<
-	@cd build; bin/$*  # @todo Remove all ../ from config path, and just run $< from the root directory
+	@$<
 	@touch $@
 
 ##################

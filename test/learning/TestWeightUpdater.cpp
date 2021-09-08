@@ -12,10 +12,10 @@
 
 Config getWeightTestConf() {
   Config conf;
-  conf.data_dir = "../data/tests/";
+  conf.data_dir = "data/tests/";
   try {
     conf.logger =
-        spdlog::basic_logger_mt("test_logger", "../logs/test_logger.txt");
+        spdlog::basic_logger_mt("test_logger", "logs/test_logger.txt");
   } catch (const spdlog::spdlog_ex &ex) {
     conf.logger = spdlog::get("test_logger");
   }
