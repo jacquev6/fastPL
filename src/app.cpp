@@ -132,13 +132,13 @@ int App::run() {
     return 1;
   }
 
-  AlternativesPerformance dataset = dg.loadDataset(data_path);
+  AlternativesPerformance dataset = dg.loadDataset(conf.dataset);
   conf.logger->info("Dataset loaded");
 
   HeuristicPipeline hp = HeuristicPipeline(conf, dataset);
   MRSortModel opti = hp.start();
   conf.logger->info("Saving models...");
-  dg.saveModel(model_path, opti.lambda, opti.criteria, opti.profiles, true,
+  dg.saveModel(conf.output, opti.lambda, opti.criteria, opti.profiles, true,
                opti.getId());
   conf.logger->info("App terminated");
   return 0;
