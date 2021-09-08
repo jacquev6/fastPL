@@ -1,5 +1,5 @@
-#include "../../extsrc/spdlog/include/spdlog/fmt/ostr.h"
-#include "../../extsrc/spdlog/include/spdlog/spdlog.h"
+#include "spdlog/fmt/ostr.h"
+#include "spdlog/spdlog.h"
 
 #include "../../include/learning/ProfileInitializer.h"
 #include "../../include/types/AlternativesPerformance.h"

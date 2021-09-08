@@ -21,9 +21,9 @@ int main(int argc, char *argv[]) {
   // yaml config that holds general config of the application
   YAML::Node yaml_config;
   try {
-    yaml_config = YAML::LoadFile("../app-config.yaml");
+    yaml_config = YAML::LoadFile("app-config.yaml");
   } catch (...) {
-    std::cerr << "ERROR: app-config.yaml file not found at ../. from where the "
+    std::cerr << "ERROR: app-config.yaml file not found in the directory from where the "
                  "program got executed."
               << std::endl;
     return 1;

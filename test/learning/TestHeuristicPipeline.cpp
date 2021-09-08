@@ -6,12 +6,12 @@
 
 Config getHeuristicTestConf() {
   Config conf;
-  conf.data_dir = "../data/tests/";
+  conf.data_dir = "data/tests/";
   conf.model_batch_size = 5;
   conf.max_iterations = 10;
   try {
     conf.logger =
-        spdlog::basic_logger_mt("test_logger", "../logs/test_logger.txt");
+        spdlog::basic_logger_mt("test_logger", "logs/test_logger.txt");
   } catch (const spdlog::spdlog_ex &ex) {
     conf.logger = spdlog::get("test_logger");
   }

@@ -22,8 +22,6 @@ The full description and documentation of the project can be found at <https://m
 
 * [test](<https://github.com/Mostah/fastPL/tree/master/test>) : Test files
 
-* [extsrc](<https://github.com/Mostah/fastPL/tree/master/extsrc>) : External sources and dependencies
-
 * [data](<https://github.com/Mostah/fastPL/tree/master/data>) : Data (datasets and models) repository
 
 * [doc](<https://github.com/Mostah/fastPL/tree/master/doc>) : Doxygen documentation repository
@@ -34,113 +32,50 @@ The full description and documentation of the project can be found at <https://m
 
 ## Run project in Docker (Recommended)
 
-### Build Docker image
+You can find [here](<https://docs.docker.com/>) some documentation on docker.
 
-First thing first, build the docker image. You can find [here](<https://docs.docker.com/>) some documentation on docker.
+### Build
+
+The following command will build a Docker image with all this project's dependencies,
+then build the project in `./build` and run its automated tests.
 
 ```bash
-docker build . -t fastpl
+./run-dev.sh make -j8
 ```
 
-Currently, the build of all dependencies requires ~1h
-
-### Run the main app in Docker
+### Run the main app
 
 The following command will show the run config options (helper):
 
 ```bash
-docker run fastpl ./Main -h
+./run-dev.sh build/bin/fastpl -h
 ```
 
 To run the app with on a specific dataset:
 
 ```bash
-docker run fastpl ./Main -d $dataset_path -o $output_path
+./run-dev.sh build/bin/fastpl -d $dataset_path -o $output_path
 ```
 
 At the end of the algorithm, the model will be stored in the `$output_path`
 
-### Run the tests in Docker
+### Logs
 
-Run all tests:
-
-```bash
-docker run fastpl ./Test
-```
-
-Run specified tests:
-
-```bash
-docker run fastpl ./Test --gtest_filter=TestGeneralName.TestPreciseName   # One specific Test
-docker run fastpl ./Test --gtest_filter=TestGeneralName.*                 # All tests of Name1 = GeneralName 
-```
-
-### Check the logs
-
-Get the fastpl docker container id by running `docker ps`
-
-```bash
-docker run -it $container_id /bin/bash 
-cd /home/fastpl/logs
-```
+They are in `./logs/`.
 
 ---
 
 ## Run project locally
 
-The following requires [CMake](<https://cmake.org/>) to be installed in your machine.
+This is *not supported* but may work if you have all dependencies installed.
+You'll find what's required in `dev-container/dockerfile`.
 
-From the root of the project directory:
-
-### Download dependencies
-
-```bash
-git submodule init
-git submodule update
-```
-
-### Build C++ files
+Then just run the commands that are after `./run-dev.sh` in the previous section:
 
 ```bash
-mkdir build && cd build
-cmake .. -DBUILD_DEPS:BOOL=ON -DUSE_SCIP=OFF && make
-```
-
-Currently, the build of all dependencies requires ~1h
-
-### Run the main app locally
-
-From the `build` directory:
-
-The following command will show the run config options (helper):
-
-```bash
-./Main -h
-```
-
-To run the app on a specified dataset:
-
-```bash
-./Main -d $dataset_path -o $output_path
-```
-
-At the end of the algorithm, the model will be stored in the `$output_path`
-
-### Run the tests locally
-
-From the `build` directory:
-
-Run all tests:
-
-```bash
-./Test
-```
-
-Run specified tests:
-
-```bash
-./Test --gtest_filter=TestGeneralName.TestPreciseName   # One specific Test
-./Test --gtest_filter=TestGeneralName.*                 # All tests of Name1 = GeneralName 
+make -j8
+build/bin/fastpl -h
+build/bin/fastpl -d $dataset_path -o $output_path
 ```
 
 ---
@@ -205,47 +140,3 @@ Open the documentation on your browser, from `/doc/html` directory:
 ```bash
 open index.html
 ```
-
----
-
-## Profiling
-
-Profiling requires the app to be run on a Docker container. The following assumes the fastpl app has already been built by docker.
-
-### Profiling with GPROF
-
-#### Running the docker container and ssh into it
-
-```bash
-docker run -it fastpl /bin/bash
-```
-
-#### Executing the program we want to profile
-
-```bash
-./$PROGRAM
-```
-
-#### Creating the profiling data as a callgraph image (Recommended)
-
-```bash
-gprof $PROGRAM | python3 gprof2dot/gprof2dot.py | dot -Tpng -o analysis.png
-```
-
-#### Creating the profiling data as a text file
-
-```bash
-gprof $PROGRAM > analysis.txt
-```
-
-#### Copy the analysis from the docker container into your machine
-
-Keep this terminal open, and open a new one
-
-Get the $ID of the fastpl container running with `docker ps`
-
-```bash
-docker cp $ID:/home/fastPL/build/analysis.{txt or png} $YOUR_PATH
-```
-
-The profiling data should now be in $YOUR_PATH in your machine.

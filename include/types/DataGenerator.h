@@ -12,7 +12,7 @@
 // forked repo and uncomment in pugixml/src/pugiconfig.hpp
 // line 48 #define PUGIXML_HEADER_ONLY
 
-#include "../../extsrc/pugixml/src/pugixml.hpp"
+#include <pugixml.hpp>
 #include "../app.h"
 #include "AlternativesPerformance.h"
 #include "Criterion.h"
