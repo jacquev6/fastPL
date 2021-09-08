@@ -57,6 +57,10 @@ To run the app with on a specific dataset:
 ./run-dev.sh build/bin/fastpl -d $dataset_path -o $output_path
 ```
 
+In that command, both arguments are paths to files, relative to the `data_dir` specified in `app-config.yml`.
+For example, with the `app-config.yml` from the repository,
+the following command generates the `data/output/model1.xml` file: `mkdir -p data/outputs; ./run-dev.sh build/bin/fastpl -d tests/in1dataset.xml -o outputs/model1.xml`.
+
 At the end of the algorithm, the model will be stored in the `$output_path`
 
 ### Logs
