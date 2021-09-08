@@ -8,7 +8,7 @@
  * All utility fonctions are referenced and implemented inside this file.
  */
 
-#include "../extsrc/pugixml/src/pugixml.hpp"
+#include "pugixml.hpp"
 #include "types/AlternativesPerformance.h"
 #include "types/Profiles.h"
 #include <matplot/matplot.h>
